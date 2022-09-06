@@ -1,0 +1,257 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* The otf Fonts */
+@font-face {
+    font-family: 'display_net';
+    src: url('waltograph42.otf') format('opentype');
+}
+@font-face{
+    font-family: 'display_net1';
+    src: url('waltographUI.ttf') format('turetype');
+}
+@font-face {
+    font-family: 'disney_net2';
+    src: url('WhiteDreamPersonalUseOnlyRegular-L37Rn.otf') format('opentype');
+}
+@font-face {
+    font-family: 'Avenger1';
+    src: url('averia_serif_libre.ttf') format('truetype');
+}
+/* End of ttf */
+body{
+    width: 100%;
+    background: #0c111b;
+    position: relative;
+}
+
+/* Navbar Styling */
+.navbar{
+    width: 100%;
+    height: 80px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 0.4%;
+    background: #0c111b;
+    z-index: 9;
+    display: flex;
+    align-items: center;
+}
+.brand-logo{
+    height: 70px;
+}
+.nav-links{
+    margin-top: 10px;
+    display: flex;
+    list-style: none;
+}
+.nav-item a{
+    text-decoration: none;
+    margin-left: 20px;
+    color: #fff;
+    opacity: 0.9;
+    font-family: 'display_net';
+    font-size: 20px;
+}
+/* Navbar End */
+
+/* The Right Section of Navbar */
+.right-container{
+    display: block;
+    margin-left: auto;
+}
+.search-box{
+    border: none;
+    border-bottom: 1px solid #aaa;
+    outline: none;
+    background: transparent;
+    height: 30px;
+    width: 250px;
+    color: #fff;
+    text-transform: capitalize;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'disney_net2';
+}
+.search-box:focus{
+    width: 400px;
+    border-color: #1f80e0;
+}
+.sub-btn{
+    background: #1f80e0;
+    height: 30px;
+    padding: 0 20px;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5em;
+    font-family: 'display_net';
+    font-weight: 700;
+    font-size: 12px;
+    margin: 0 10px;
+}
+.login-link{
+    color: #fff;
+    opacity: 0.9;
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    font-family: 'display_net1';
+}
+/* The Right Section of Navbar End*/
+
+.Welcome h1{
+    margin-top: 150px;
+    width: 100%;
+    height: 20px;
+    align-items: center;
+    margin-left: 300px;
+    font-family: 'Avenger1';
+    font-size: 5rem;
+    color: #fff;
+}
+.Welcome p{
+    margin-top: -0.51px;
+    margin-left: 590px;
+    font-family: 'display_net';
+    font-size: 5rem;
+    color: #fff;
+}
+/* Main Slider */
+.main-slider{
+    position: relative;
+    width: 100%;
+    height: 490px;
+    padding: 20px 0;
+    overflow-x: hidden;
+    margin: 80px;
+}
+.carousel{
+    display: flex;
+    width: 92%;
+    height:100%;
+    float: right;
+    position: relative;
+    margin: auto;
+    background: transparent;
+    animation: 20s slide infinite;
+    animation-delay: 1s;
+    
+}
+
+.slider{
+    flex: 0 0 auto;
+    margin-right: 30px;
+    position: relative;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    transition: 1s;
+    background: rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+.slider img{
+    width: 70%;
+    min-height:100%;
+    float: right;
+    object-fit: cover;
+    display:block;
+    margin-left: auto;
+    overflow: hidden;
+}
+.slider_content{
+    position:absolute;
+    width: 50%;
+    height: 100%;
+    z-index: 2;
+    background: linear-gradient(to right,#030b17 80%,#0c111b00);
+    color: #fff;
+}
+.movie-title{
+    padding-left: 50px;
+    text-transform: capitalize;
+    margin-top: 80px;
+    font-family:'Avenger1' ;
+}
+.movie_des{
+    width: 80%;
+    line-height: 30px;
+    padding-left: 50px;
+    margin-top: 30px;
+    opacity: 0.8;
+    font-family: 'display_net1';
+}
+@keyframes slide {
+    0%{
+        left: 0;
+    }
+    20%{
+        left: 0;
+    }
+    25%{
+        left: -100%;
+    }
+    40%{
+        left: -100%;     
+    }
+     50%{
+        left: -199%;
+    }
+    60%{
+        left: -290%;
+    }
+    70%{
+        left: -290%;
+    }
+    90%{
+        left: -390%;
+    }
+    100%{
+        left: -400%;
+    } 
+
+    
+}
+
+
+/* Main Slider End */
+
+/* video container */
+.video-card-container{
+    position: relative;
+    width: 92%;
+    margin: auto;
+    height: 10vw;
+    display: flex;
+    margin-bottom: 20px;
+    justify-content: space-between;
+}
+.card-video{
+    position: relative;
+    min-width: calc(100% / 5 - 10px);
+    width: calc(100% / 5 - 10px);
+    height: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+    /* background: #030b17; */
+}
+.cardVimage,
+.cardVvideo{
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+}
+.cardVvideo{
+    position: absolute;
+}
+.card-video:hover .cardVimage{
+    display: none;
+}
+/* video container End */

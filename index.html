@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disney</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        function getBrowserInfo() {
+            var userAgent = navigator.userAgent;
+
+            var browserInfoArr = parseBrowserInfo(userAgent);
+
+            var browserUserAgentDiv = document.getElementById('browserUserAgent');
+
+            var browserNameDiv = document.getElementById('browserName');
+
+            var browserVersionDiv = document.getElementById('browserVersion');
+
+            browserNameDiv.innerHTML = browserInfoArr[0];
+
+            browserVersionDiv.innerHTML = browserInfoArr[1];
+
+
+        }
+
+        function parseBrowserInfo(browserUserAgentString) {
+
+            // The returned array contains 3 elements, browser name, version, running device.
+            var ret = new Array();
+
+            if (browserUserAgentString != null) {
+
+                browserUserAgentString = browserUserAgentString.trim()
+
+                var lowerStr = browserUserAgentString.toLowerCase();
+
+                if (lowerStr != '') {
+
+                    var startIdx = browserUserAgentString.indexOf("(");
+                    var endIdx = browserUserAgentString.indexOf(")", startIdx + 1);
+
+                    var name = '';
+
+                    var version = '';
+
+                    var deviceOS = browserUserAgentString.substring(startIdx + 1, endIdx);
+
+                    // web browser on mobile device.
+                    if (lowerStr.indexOf('mobile') > 0) {
+
+                        let KEYWORD_OPR = 'opt/';
+                        let KEYWORD_CHROME = 'crios/';
+                        let KEYWORD_FIREFOX = 'fxios/';
+                        let KEYWORD_EDG = 'edgios/';
+                        let KEYWORD_SAFARI = 'version/';
+
+                        if (lowerStr.indexOf(KEYWORD_OPR) > -1) {
+
+                            startIdx = lowerStr.indexOf(KEYWORD_OPR);
+
+                            name = "Opera";
+
+                            version = browserUserAgentString.substring(startIdx + KEYWORD_OPR.length);
+
+                        } else if (lowerStr.indexOf(KEYWORD_CHROME) > -1) {
+
+                            startIdx = lowerStr.indexOf(KEYWORD_CHROME);
+
+                            endIdx = lowerStr.indexOf(' ', startIdx + KEYWORD_CHROME.length);
+
+                            name = "Chrome";
+
+                            version = browserUserAgentString.substring(startIdx + KEYWORD_CHROME.length, endIdx);
+                        } else if (lowerStr.indexOf(KEYWORD_FIREFOX) > -1) {
+
+                            startIdx = lowerStr.indexOf(KEYWORD_FIREFOX);
+
+                            endIdx = lowerStr.indexOf(' ', startIdx + 1);
+
+                            name = "Firefox";
+
+                            version = browserUserAgentString.substring(startIdx + KEYWORD_FIREFOX.length, endIdx);
+                        } else if (lowerStr.indexOf(KEYWORD_EDG) > -1) {
+
+                            startIdx = lowerStr.indexOf(KEYWORD_EDG);
+
+                            endIdx = lowerStr.indexOf(' ', startIdx + 1);
+
+                            name = "Microsoft Edge";
+
+                            version = browserUserAgentString.substring(startIdx + KEYWORD_EDG.length, endIdx);
+                        } else {
+
+                            name = 'Safari';
+
+                            startIdx = lowerStr.indexOf(KEYWORD_SAFARI);
+
+                            endIdx = lowerStr.indexOf(' ', startIdx + 1);
+
+                            version = browserUserAgentString.substring(startIdx + KEYWORD_SAFARI.length, endIdx);
+                        }
+                    }
+                    // web browser on desktop or laptop OS.
+                    else {
+
+                        let KEYWORD_OPR = 'opr/';
+                        let KEYWORD_CHROME = 'chrome/';
+                        let KEYWORD_FIREFOX = 'firefox/';
+                        let KEYWORD_EDG = 'edg/';
+                        let KEYWORD_SAFARI = 'version/';
+
+                        if (lowerStr.indexOf(KEYWORD_OPR) > -1) {
+
+                            keyword = ''
+
+                            startIdx = lowerStr.indexOf(KEYWORD_OPR);
+
+                            name = "Opera";
+
+                            version = browserUserAgentString.substring(startIdx + KEYWORD_OPR.length);
+
+                        } else if (lowerStr.indexOf(KEYWORD_EDG) > -1) {
+
+                            startIdx = lowerStr.indexOf(KEYWORD_EDG);
+
+                            name = "Microsoft Edge";
+
+                            version = browserUserAgentString.substring(startIdx + KEYWORD_EDG.length);
+                        } else if (lowerStr.indexOf(KEYWORD_FIREFOX) > -1) {
+
+                            startIdx = lowerStr.indexOf(KEYWORD_FIREFOX);
+
+                            name = "Firefox";
+
+                            version = browserUserAgentString.substring(startIdx + KEYWORD_FIREFOX.length);
+                        } else if (lowerStr.indexOf(KEYWORD_CHROME) > -1) {
+
+                            startIdx = lowerStr.indexOf(KEYWORD_CHROME);
+
+                            endIdx = lowerStr.indexOf(' ', startIdx + 1);
+
+                            name = "Chrome";
+
+                            version = browserUserAgentString.substring(startIdx + KEYWORD_CHROME.length, endIdx);
+                        } else {
+
+                            name = 'Safari';
+
+                            startIdx = lowerStr.indexOf(KEYWORD_SAFARI);
+
+                            endIdx = lowerStr.indexOf(' ', startIdx + 1);
+
+                            version = browserUserAgentString.substring(startIdx + KEYWORD_SAFARI.length, endIdx);
+                        }
+                    }
+
+                    ret.push(name);
+                    ret.push(version);
+                    ret.push(deviceOS);
+
+                }
+            }
+
+            return ret;
+        }
+
+
+    </script>
+</head>
+
+<body onload="getBrowserInfo()">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <img src="images/logo.png" class="brand-logo" alt="">
+        <ul class="nav-links">
+            <li class="nav-item"><a href="#">Certification</a></li>
+            <li class="nav-item"><a href="#">Android App</a></li>
+            <li class="nav-item"><a href="#">Website Design</a></li>
+            <li class="nav-item"><a href="#">Buisness Idea</a></li>
+        </ul>
+        <div class="right-container">
+            <input type="text" name="search" class="search-box" placeholder="Search" id="">
+            <button class="sub-btn">Subscribe</button>
+            <a href="#" class="login-link">Login</a>
+        </div>
+    </nav>
+
+    <div class="Welcome">
+        <h1 id="browserName"></h1>
+        <p id="browserVersion"></p>
+    </div>
+    <!-- End of Navigation Bar -->
+    <!-- The Section of Slider -->
+    <div class="main-slider">
+        <div class="carousel">
+           <!-- Image First -->
+            <div class="slider">
+                <div class="slider_content">
+                    <h1 class="movie-title">Loki</h1>
+                    <p class="movie_des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, velit
+                        natus nihil modi ratione soluta? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi
+                        harum minus, inventore magnam molestiae tempora hic accusamus suscipit? Repellat, quibusdam.</p>
+                </div>
+                <img src="images/slider 1.PNG" alt="">
+            </div>
+            <!-- Second Image -->
+            <div class="slider">
+                <div class="slider_content">
+                    <h1 class="movie-title">Falcon the Winter Soldier </h1>
+                    <p class="movie_des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, velit
+                        natus nihil modi ratione soluta? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi
+                        harum minus, inventore magnam molestiae tempora hic accusamus suscipit? Repellat, quibusdam.</p>
+                </div>
+                <img src="images/slider 2.PNG" alt="">
+            </div>
+           <!-- Third Image -->
+            <div class="slider">
+                <div class="slider_content">
+                    <h1 class="movie-title">Wanda Vesion</h1>
+                    <p class="movie_des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, velit
+                        natus nihil modi ratione soluta? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi
+                        harum minus, inventore magnam molestiae tempora hic accusamus suscipit? Repellat, quibusdam.</p>
+                </div>
+                <img src="images/slider 3.PNG" alt="">
+            </div>
+           <!-- Fouth Image -->
+            <div class="slider">
+                <div class="slider_content">
+                    <h1 class="movie-title">Raya the Last Dragon</h1>
+                    <p class="movie_des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, velit
+                        natus nihil modi ratione soluta? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi
+                        harum minus, inventore magnam molestiae tempora hic accusamus suscipit? Repellat, quibusdam.</p>
+                </div>
+                <img src="images/slider 4.PNG" alt="">
+            </div>
+            <!-- Fifth Image -->
+            <div class="slider">
+                <div class="slider_content">
+                    <h1 class="movie-title">Luca</h1>
+                    <p class="movie_des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, velit
+                        natus nihil modi ratione soluta? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi
+                        harum minus, inventore magnam molestiae tempora hic accusamus suscipit? Repellat, quibusdam.</p>
+                </div>
+                <img src="images/slider 5.PNG" alt="">
+            </div>
+            
+        </div>
+    </div>
+    <div class="video-card-container">
+        <!-- first video -->
+        <div class="card-video">
+            <img src="images/disney.PNG" class="cardVimage" alt="">
+            <video src="videos/disney.mp4" class="cardVvideo" muted loop></video>
+        </div>
+        <!-- second video -->
+        <div class="card-video">
+            <img src="images/pixar.PNG" class="cardVimage" alt="">
+            <video src="videos/pixar.mp4" class="cardVvideo" muted loop></video>
+        </div>
+        <!-- thrid video -->
+        <div class="card-video">
+            <img src="images/marvel.PNG" class="cardVimage" alt="">
+            <video src="videos/marvel.mp4" class="cardVvideo" muted loop></video>
+        </div>
+        <!-- fourth video -->
+        <div class="card-video">
+            <img src="images/star-wars.PNG" class="cardVimage" alt="">
+            <video src="videos/star-war.mp4" class="cardVvideo" muted loop></video>
+        </div>
+        <!-- fifth video -->
+        <div class="card-video">
+            <img src="images/geographic.PNG" class="cardVimage" alt="">
+            <video src="videos/geographic.mp4" class="cardVvideo" muted loop></video>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+
+</html>

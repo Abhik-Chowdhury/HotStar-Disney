@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>How To Use Javascript To Get Web Browser Name And Version Example</title>
+<script>
+
+function getBrowserInfo(){
+
+    var userAgent = navigator.userAgent;
+
+    var browserInfoArr = parseBrowserInfo(userAgent);
+
+    var browserUserAgentDiv = document.getElementById('browserUserAgent');
+
+    var browserNameDiv = document.getElementById('browserName');
+
+    var browserVersionDiv = document.getElementById('browserVersion');
+
+    var browserRunningDeviceDiv = document.getElementById('browserRunningDevice');
+
+    browserUserAgentDiv.innerHTML = 'Browser user agent: ' + userAgent;
+
+    browserNameDiv.innerHTML = 'Browser name: ' + browserInfoArr[0];
+
+    browserVersionDiv.innerHTML = 'Browser version: ' + browserInfoArr[1];
+
+    browserRunningDeviceDiv.innerHTML = 'Browser running device OS: ' + browserInfoArr[2]; 
+
+}
+
+function parseBrowserInfo(browserUserAgentString){
+
+    // The returned array contains 3 elements, browser name, version, running device.
+    var ret = new Array();
+
+    if(browserUserAgentString != null){
+
+        browserUserAgentString = browserUserAgentString.trim()
+
+        var lowerStr = browserUserAgentString.toLowerCase();
+
+        if(lowerStr != ''){
+
+            var startIdx = browserUserAgentString.indexOf("(");
+            var endIdx = browserUserAgentString.indexOf(")", startIdx + 1);
+
+            var name = '';
+
+            var version = '';
+
+            var deviceOS = browserUserAgentString.substring(startIdx+1, endIdx);
+
+            // web browser on mobile device.
+            if(lowerStr.indexOf('mobile') > 0){
+
+                let KEYWORD_OPR= 'opt/';
+                let KEYWORD_CHROME= 'crios/';
+                let KEYWORD_FIREFOX= 'fxios/';
+                let KEYWORD_EDG= 'edgios/';
+                let KEYWORD_SAFARI= 'version/'; 
+
+                if(lowerStr.indexOf(KEYWORD_OPR) > -1){
+
+                    startIdx = lowerStr.indexOf(KEYWORD_OPR);
+                    
+                    name = "Opera";
+
+                    version = browserUserAgentString.substring(startIdx + KEYWORD_OPR.length);
+
+                }else if(lowerStr.indexOf(KEYWORD_CHROME) > -1){
+
+                    startIdx = lowerStr.indexOf(KEYWORD_CHROME);
+                    
+                    endIdx = lowerStr.indexOf(' ', startIdx + KEYWORD_CHROME.length);
+
+                    name = "Chrome";
+
+                    version = browserUserAgentString.substring(startIdx + KEYWORD_CHROME.length, endIdx);
+                }else if(lowerStr.indexOf(KEYWORD_FIREFOX) > -1){
+
+                    startIdx = lowerStr.indexOf(KEYWORD_FIREFOX);
+
+                    endIdx = lowerStr.indexOf(' ', startIdx + 1);
+
+                    name = "Firefox";
+
+                    version = browserUserAgentString.substring(startIdx + KEYWORD_FIREFOX.length, endIdx);
+                }else if(lowerStr.indexOf(KEYWORD_EDG) > -1){
+
+                    startIdx = lowerStr.indexOf(KEYWORD_EDG);
+
+                    endIdx = lowerStr.indexOf(' ', startIdx + 1);
+
+                    name = "Microsoft Edge";
+
+                    version = browserUserAgentString.substring(startIdx + KEYWORD_EDG.length, endIdx);
+                }else{
+
+                    name = 'Safari';
+
+                    startIdx = lowerStr.indexOf(KEYWORD_SAFARI);
+
+                    endIdx = lowerStr.indexOf(' ', startIdx + 1);
+
+                    version = browserUserAgentString.substring(startIdx + KEYWORD_SAFARI.length, endIdx);
+                }
+            }
+            // web browser on desktop or laptop OS.
+            else{
+
+                let KEYWORD_OPR= 'opr/';
+                let KEYWORD_CHROME= 'chrome/';
+                let KEYWORD_FIREFOX= 'firefox/';
+                let KEYWORD_EDG= 'edg/';
+                let KEYWORD_SAFARI= 'version/';
+
+                if(lowerStr.indexOf(KEYWORD_OPR) > -1){
+
+                    keyword = ''
+
+                    startIdx = lowerStr.indexOf(KEYWORD_OPR);
+
+                    name = "Opera";
+
+                    version = browserUserAgentString.substring(startIdx + KEYWORD_OPR.length);
+
+                }else if(lowerStr.indexOf(KEYWORD_EDG) > -1){
+
+                    startIdx = lowerStr.indexOf(KEYWORD_EDG);
+
+                    name = "Microsoft Edge";
+
+                    version = browserUserAgentString.substring(startIdx + KEYWORD_EDG.length);
+                }else if(lowerStr.indexOf(KEYWORD_FIREFOX) > -1){
+
+                    startIdx = lowerStr.indexOf(KEYWORD_FIREFOX);
+
+                    name = "Firefox";
+
+                    version = browserUserAgentString.substring(startIdx + KEYWORD_FIREFOX.length);
+                }else if(lowerStr.indexOf(KEYWORD_CHROME) > -1){
+
+                    startIdx = lowerStr.indexOf(KEYWORD_CHROME);
+
+                    endIdx = lowerStr.indexOf(' ', startIdx + 1);
+
+                    name = "Chrome";
+
+                    version = browserUserAgentString.substring(startIdx + KEYWORD_CHROME.length, endIdx);
+                }else{
+
+                    name = 'Safari';
+
+                    startIdx = lowerStr.indexOf(KEYWORD_SAFARI);
+
+                    endIdx = lowerStr.indexOf(' ', startIdx + 1);
+
+                    version = browserUserAgentString.substring(startIdx + KEYWORD_SAFARI.length, endIdx);
+                }
+            }
+
+            ret.push(name);
+            ret.push(version);
+            ret.push(deviceOS);
+
+        }
+    }
+
+    return ret;
+}
+    
+</script>
+<style>
+    .block{
+        display:block; 
+        margin-top: 10px;
+    }
+</style>
+</head>
+<body onload="getBrowserInfo()">
+<h3>How To Use Javascript To Get Web Browser Name And Version Example.</h3>
+<div id="browserUserAgent" class="block"></div>
+<div id="browserName" class="block"></div>
+<div id="browserVersion" class="block"></div>
+<div id="browserRunningDevice" class="block"></div>
+<img src="images/slider 1.PNG" alt="">
+</body>
+</html>
